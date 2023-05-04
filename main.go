@@ -8,7 +8,7 @@ import (
 	"github.com/potatoschool/homework-april-packages/shapes/rectangle"
 )
 
-func main() {
+func Load() {
 	var shapeName string
 	var shape shapes.IShape
 
