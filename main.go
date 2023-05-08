@@ -1,4 +1,4 @@
-package packages
+package main
 
 import (
 	"fmt"
@@ -9,33 +9,68 @@ import (
 	"github.com/potatoschool/homework-april-packages/shapes/rectangle"
 )
 
-func Load() {
+func main() {
+	var i int
 	var shapeName string
 	var shape shapes.IShape
+	var availableShapesMainAliases []string
+	availableShapes := map[string]func() shapes.IShape{}
+
+	ShapesData := map[string]func() shapes.IShape{
+		rectangle.GetAlias(): rectangle.ToShape,
+		circle.GetAlias():    circle.ToShape,
+	}
+
+	for shapeAliases, ShapeConstructor := range ShapesData {
+		aliases := strings.Split(shapeAliases, ",")
+
+		for _, shapeAlias := range aliases {
+			availableShapes[shapeAlias] = ShapeConstructor
+		}
+		availableShapes[fmt.Sprintf("%d", i+1)] = ShapeConstructor
+		i++
+	}
+
+	i = 0
+	for shapeAliases := range ShapesData {
+		aliases := strings.Split(shapeAliases, ",")
+		mainAlias := aliases[0]
+
+		availableShapesMainAliases = append(availableShapesMainAliases, fmt.Sprintf("%d) %s", i+1, mainAlias))
+		i++
+	}
+
+	fmt.Println("--- \033[33mКонструктор Фигур\033[0m --- ")
+	fmt.Printf("\033[32mДоступные фигуры:\033[0m \n%s\n", strings.Join(availableShapesMainAliases, "\n"))
+	fmt.Println("\033[32mДоступные команды:\033[0m")
+	fmt.Println("\033[33m--list:\033[0m для просмотра всех доступных фигур и их алиасов")
+	fmt.Println("--------------------------")
 
 	for shape == nil {
-		fmt.Println("Выберите фигуру (rectangle или circle)")
+		fmt.Println("Введите команду")
 		fmt.Scanln(&shapeName)
 
 		shapeName = strings.ToLower(shapeName)
+		targetShape, exists := availableShapes[shapeName]
 
-		switch shapeName {
-		case "Rectangle":
-			fallthrough
-		case "r":
-			fallthrough
-		case "R":
-			fallthrough
-		case "rectangle":
-			shape = rectangle.New()
-		case "Circle":
-			fallthrough
-		case "c":
-			fallthrough
-		case "circle":
-			shape = circle.New()
-		default:
-			fmt.Println("Доступны только rectangle или circle")
+		if exists {
+			shape = targetShape()
+		} else if shapeName == "--list" {
+			i = 0
+
+			for shapeAliases := range ShapesData {
+				aliases := strings.Split(shapeAliases, ",")
+				mainAlias := aliases[0]
+
+				fmt.Printf("%d. %s:\n", i+1, mainAlias)
+				for _, alias := range aliases {
+					fmt.Printf("- %s\n", alias)
+				}
+				i++
+				fmt.Println()
+			}
+		} else {
+			fmt.Println("Фигуры не существует!")
 		}
 	}
 
