@@ -13,7 +13,9 @@ func main() {
 	var i int
 	var shapeName string
 	var shape shapes.IShape
+	var availableShapesAllAliases []string
 	var availableShapesMainAliases []string
+
 	availableShapes := map[string]func() shapes.IShape{}
 
 	ShapesData := map[string]func() shapes.IShape{
@@ -23,20 +25,17 @@ func main() {
 
 	for shapeAliases, ShapeConstructor := range ShapesData {
 		aliases := strings.Split(shapeAliases, ",")
-
-		for _, shapeAlias := range aliases {
-			availableShapes[shapeAlias] = ShapeConstructor
-		}
-		availableShapes[fmt.Sprintf("%d", i+1)] = ShapeConstructor
-		i++
-	}
-
-	i = 0
-	for shapeAliases := range ShapesData {
-		aliases := strings.Split(shapeAliases, ",")
 		mainAlias := aliases[0]
 
 		availableShapesMainAliases = append(availableShapesMainAliases, fmt.Sprintf("%d) %s", i+1, mainAlias))
+		availableShapesAllAliases = append(availableShapesAllAliases, fmt.Sprintf("%d. %s:\n", i+1, mainAlias))
+
+		for _, shapeAlias := range aliases {
+			availableShapes[shapeAlias] = ShapeConstructor
+			availableShapesAllAliases = append(availableShapesAllAliases, fmt.Sprintf(" - %s\n", shapeAlias))
+		}
+
+		availableShapes[fmt.Sprintf("%d", i+1)] = ShapeConstructor
 		i++
 	}
 
@@ -56,19 +55,7 @@ func main() {
 		if exists {
 			shape = targetShape()
 		} else if shapeName == "--list" {
-			i = 0
-
-			for shapeAliases := range ShapesData {
-				aliases := strings.Split(shapeAliases, ",")
-				mainAlias := aliases[0]
-
-				fmt.Printf("%d. %s:\n", i+1, mainAlias)
-				for _, alias := range aliases {
-					fmt.Printf("- %s\n", alias)
-				}
-				i++
-				fmt.Println()
-			}
+			fmt.Println(strings.Join(availableShapesAllAliases, ""))
 		} else {
 			fmt.Println("Фигуры не существует!")
 		}
