@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/potatoschool/homework-april-packages/shapes"
+	"github.com/potatoschool/homework-april-packages/shapes/circle"
 	"github.com/potatoschool/homework-april-packages/shapes/rectangle"
 )
 
@@ -12,21 +13,28 @@ func Load() {
 	var shapeName string
 	var shape shapes.IShape
 
-	sh := map[string]func() shapes.IShape{
-		"rectangle": rectangle.ToShape,
-		"circle":    rectangle.ToShape,
-	}
-
 	for shape == nil {
 		fmt.Println("Выберите фигуру (rectangle или circle)")
 		fmt.Scanln(&shapeName)
 
 		shapeName = strings.ToLower(shapeName)
-		targetShape, exists := sh[shapeName]
 
-		if exists {
-			shape = targetShape()
-		} else {
+		switch shapeName {
+		case "Rectangle":
+			fallthrough
+		case "r":
+			fallthrough
+		case "R":
+			fallthrough
+		case "rectangle":
+			shape = rectangle.New()
+		case "Circle":
+			fallthrough
+		case "c":
+			fallthrough
+		case "circle":
+			shape = circle.New()
+		default:
 			fmt.Println("Доступны только rectangle или circle")
 		}
 	}
