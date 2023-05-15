@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
+	"github.com/potatoschool/homework-april-packages/game"
 	"github.com/potatoschool/homework-april-packages/shapes"
 	"github.com/potatoschool/homework-april-packages/shapes/circle"
 	"github.com/potatoschool/homework-april-packages/shapes/rectangle"
@@ -15,6 +17,8 @@ func main() {
 	var shape shapes.IShape
 	var availableShapesAllAliases []string
 	var availableShapesMainAliases []string
+	var launchVisualUserInput string
+	var launchVisual bool
 
 	availableShapes := map[string]func() shapes.IShape{}
 
@@ -62,4 +66,36 @@ func main() {
 	}
 
 	shapes.GetInfo(shape)
+
+	for launchVisualUserInput == "" {
+		fmt.Println("Запустить визуальное представление фигуры? (Y/n)")
+		fmt.Scanln(&launchVisualUserInput)
+
+		if launchVisualUserInput == "Y" || launchVisualUserInput == "y" {
+			launchVisual = true
+		} else if launchVisualUserInput == "N" || launchVisualUserInput == "n" {
+			launchVisual = false
+		} else {
+			launchVisualUserInput = ""
+		}
+	}
+
+	if !launchVisual {
+		os.Exit(0)
+		return
+	}
+
+	settings := game.Settings{}
+
+	settings.SetHeight(320)
+	settings.SetWidth(320)
+
+	fmt.Println("Запускаем рендер...")
+
+	if err := game.Render(shape, settings); err != nil {
+		fmt.Println("Не удалось запустить представление.")
+		fmt.Printf("---\nОшибка:\n\n%s\n---", err.Error())
+		os.Exit(1)
+		return
+	}
 }

@@ -1,11 +1,16 @@
 package shapes
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type IShape interface {
 	Area() float64
 	Perimeter() float64
 	GetName() string
+	Render(*ebiten.Image)
 }
 
 func GetInfo(s IShape) {
