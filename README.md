@@ -16,7 +16,7 @@ You will see an output in a console shortly.
 ## Usage
 The programm will prompt you to enter the shape name
 
-![Startup](https://github.com/potatoschool/shapes/blob/main/assets/startup.jpg?raw=true)
+![Startup](https://github.com/potatoschool/shapes/blob/main/assets/startup.png?raw=true)
 
 ### Available shapes by default:
 - rectangle
