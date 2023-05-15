@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/potatoschool/homework-april-packages/shapes"
+	"github.com/potatoschool/shapes/shapes"
 )
 
 type Rectangle struct {
@@ -19,22 +19,22 @@ func New() Rectangle {
 	var err error
 
 	for w == 0 {
-		fmt.Println("Введите ширину (число):")
+		fmt.Println("Enter width (number):")
 		fmt.Scanln(&wInput)
 
 		w, err = strconv.ParseFloat(wInput, 64)
 		if err != nil {
-			fmt.Println("Ширина должна быть числом.")
+			fmt.Println("Width must be a number.")
 		}
 	}
 
 	for h == 0 {
-		fmt.Println("Введите длину (число):")
+		fmt.Println("Enter height (number):")
 		fmt.Scanln(&hInput)
 
 		h, err = strconv.ParseFloat(hInput, 64)
 		if err != nil {
-			fmt.Println("Ширина должна быть числом.")
+			fmt.Println("Height must be a number.")
 		}
 	}
 

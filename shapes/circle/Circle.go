@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/potatoschool/homework-april-packages/shapes"
+	"github.com/potatoschool/shapes/shapes"
 )
 
 type Circle struct {
@@ -18,12 +18,12 @@ func New() Circle {
 	var err error
 
 	for r == 0 {
-		fmt.Println("Введите радиус (число):")
+		fmt.Println("Enter radius (number):")
 		fmt.Scanln(&rInput)
 
 		r, err = strconv.ParseFloat(rInput, 64)
 		if err != nil {
-			fmt.Println("Радиус должен быть числом.")
+			fmt.Println("Radius must be a number.")
 		}
 	}
 

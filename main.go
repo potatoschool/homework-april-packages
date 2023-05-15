@@ -5,10 +5,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/potatoschool/homework-april-packages/game"
-	"github.com/potatoschool/homework-april-packages/shapes"
-	"github.com/potatoschool/homework-april-packages/shapes/circle"
-	"github.com/potatoschool/homework-april-packages/shapes/rectangle"
+	"github.com/potatoschool/shapes/game"
+	"github.com/potatoschool/shapes/shapes"
+	"github.com/potatoschool/shapes/shapes/circle"
+	"github.com/potatoschool/shapes/shapes/rectangle"
 )
 
 func main() {
@@ -43,14 +43,14 @@ func main() {
 		i++
 	}
 
-	fmt.Println("--- \033[33mКонструктор Фигур\033[0m --- ")
-	fmt.Printf("\033[32mДоступные фигуры:\033[0m \n%s\n", strings.Join(availableShapesMainAliases, "\n"))
-	fmt.Println("\033[32mДоступные команды:\033[0m")
-	fmt.Println("\033[33m--list:\033[0m для просмотра всех доступных фигур и их алиасов")
+	fmt.Println("--- \033[33mShapes Builder\033[0m --- ")
+	fmt.Printf("\033[32mAvailable shapes:\033[0m \n%s\n", strings.Join(availableShapesMainAliases, "\n"))
+	fmt.Println("\033[32mAvailable commands:\033[0m")
+	fmt.Println("\033[33m--list:\033[0m to list all available shapes and it's aliases")
 	fmt.Println("--------------------------")
 
 	for shape == nil {
-		fmt.Println("Введите команду")
+		fmt.Println("Enter command")
 		fmt.Scanln(&shapeName)
 
 		shapeName = strings.ToLower(shapeName)
@@ -61,14 +61,14 @@ func main() {
 		} else if shapeName == "--list" {
 			fmt.Println(strings.Join(availableShapesAllAliases, ""))
 		} else {
-			fmt.Println("Фигуры не существует!")
+			fmt.Printf("There is no available shape with name %s\n", shapeName)
 		}
 	}
 
-	shapes.GetInfo(shape)
+	shapes.PrintInfo(shape)
 
 	for launchVisualUserInput == "" {
-		fmt.Println("Запустить визуальное представление фигуры? (Y/n)")
+		fmt.Println("Render the shape in 2D? (Y/n)")
 		fmt.Scanln(&launchVisualUserInput)
 
 		if launchVisualUserInput == "Y" || launchVisualUserInput == "y" {
@@ -90,11 +90,11 @@ func main() {
 	settings.SetHeight(320)
 	settings.SetWidth(320)
 
-	fmt.Println("Запускаем рендер...")
+	fmt.Println("Launching render...")
 
 	if err := game.Render(shape, settings); err != nil {
-		fmt.Println("Не удалось запустить представление.")
-		fmt.Printf("---\nОшибка:\n\n%s\n---", err.Error())
+		fmt.Println("Can't launch render.")
+		fmt.Printf("---\nError:\n\n%s\n---", err.Error())
 		os.Exit(1)
 		return
 	}

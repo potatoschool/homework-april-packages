@@ -1,4 +1,4 @@
-module github.com/potatoschool/homework-april-packages
+module github.com/potatoschool/shapes
 
 go 1.19
 

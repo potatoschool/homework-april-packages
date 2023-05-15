@@ -2,7 +2,7 @@ package game
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/potatoschool/homework-april-packages/shapes"
+	"github.com/potatoschool/shapes/shapes"
 )
 
 func Render(shape shapes.IShape, settings Settings) error {

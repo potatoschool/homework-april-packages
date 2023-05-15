@@ -1,7 +1,7 @@
 package game
 
 import (
-	"github.com/potatoschool/homework-april-packages/shapes"
+	"github.com/potatoschool/shapes/shapes"
 )
 
 type Game struct {

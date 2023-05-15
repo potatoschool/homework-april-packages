@@ -13,8 +13,8 @@ type IShape interface {
 	Render(*ebiten.Image)
 }
 
-func GetInfo(s IShape) {
-	fmt.Println("--- Результат ---")
+func PrintInfo(s IShape) {
+	fmt.Println("--- Информация о фигуре ---")
 	fmt.Printf("Фигура: %s\n", s.GetName())
 	fmt.Printf("Площадь: %.2f\n", s.Area())
 	fmt.Printf("Периметр: %.2f\n", s.Perimeter())
