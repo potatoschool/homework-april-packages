@@ -14,8 +14,8 @@ type IShape interface {
 }
 
 func PrintInfo(s IShape) {
-	fmt.Println("--- Информация о фигуре ---")
-	fmt.Printf("Фигура: %s\n", s.GetName())
-	fmt.Printf("Площадь: %.2f\n", s.Area())
-	fmt.Printf("Периметр: %.2f\n", s.Perimeter())
+	fmt.Println("--- Shape info ---")
+	fmt.Printf("Shape name: %s\n", s.GetName())
+	fmt.Printf("Area: %.2f\n", s.Area())
+	fmt.Printf("Perimeter: %.2f\n", s.Perimeter())
 }
