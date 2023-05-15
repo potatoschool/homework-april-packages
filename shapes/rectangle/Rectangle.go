@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/potatoschool/shapes/logger"
 	"github.com/potatoschool/shapes/shapes"
 )
 
@@ -17,6 +18,8 @@ func New() Rectangle {
 	var wInput, hInput string
 	var w, h float64
 	var err error
+
+	logger.Log("Rectangle is chosen.")
 
 	for w == 0 {
 		fmt.Println("Enter width (number):")
@@ -39,6 +42,8 @@ func New() Rectangle {
 	}
 
 	rect := Rectangle{w, h, "rectangle"}
+
+	logger.Log(fmt.Sprintf("Rectangle initialized with width %f and height %f", w, h))
 
 	return rect
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/potatoschool/shapes/logger"
 	"github.com/potatoschool/shapes/shapes"
 )
 
@@ -17,6 +18,8 @@ func New() Circle {
 	var r float64
 	var err error
 
+	logger.Log("Circle is chosen.")
+
 	for r == 0 {
 		fmt.Println("Enter radius (number):")
 		fmt.Scanln(&rInput)
@@ -28,6 +31,8 @@ func New() Circle {
 	}
 
 	circle := Circle{r, "circle"}
+
+	logger.Log(fmt.Sprintf("Circle initialized with radius %f", r))
 
 	return circle
 }

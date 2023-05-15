@@ -1,3 +1,5 @@
 run
 .DS_Store
 tmp
+_log
+config.json

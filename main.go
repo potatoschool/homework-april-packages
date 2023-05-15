@@ -5,13 +5,22 @@ import (
 	"os"
 	"strings"
 
+	"github.com/potatoschool/shapes/config"
 	"github.com/potatoschool/shapes/game"
+	"github.com/potatoschool/shapes/logger"
 	"github.com/potatoschool/shapes/shapes"
 	"github.com/potatoschool/shapes/shapes/circle"
 	"github.com/potatoschool/shapes/shapes/rectangle"
 )
 
 func main() {
+	config.Read("./config.json")
+	logger.Start()
+
+	defer logger.End()
+
+	logger.Log("Starting")
+
 	var i int
 	var shapeName string
 	var shape shapes.IShape
@@ -42,6 +51,8 @@ func main() {
 		availableShapes[fmt.Sprintf("%d", i+1)] = ShapeConstructor
 		i++
 	}
+
+	logger.Log(fmt.Sprintf("Available shapes: %s", strings.Join(availableShapesMainAliases, ",")))
 
 	fmt.Println("--- \033[33mShapes Builder\033[0m --- ")
 	fmt.Printf("\033[32mAvailable shapes:\033[0m \n%s\n", strings.Join(availableShapesMainAliases, "\n"))
@@ -81,6 +92,7 @@ func main() {
 	}
 
 	if !launchVisual {
+		logger.Log("User has decided not to render.")
 		os.Exit(0)
 		return
 	}
@@ -90,9 +102,12 @@ func main() {
 	settings.SetHeight(320)
 	settings.SetWidth(320)
 
+	logger.Log(fmt.Sprintf("User decided to render. Rendering a window with settings: screenWidth %d, screenHeight %d", 320, 320))
+
 	fmt.Println("Launching render...")
 
 	if err := game.Render(shape, settings); err != nil {
+		logger.Log(fmt.Sprintf("Error in renderer, %s", err.Error()))
 		fmt.Println("Can't launch render.")
 		fmt.Printf("---\nError:\n\n%s\n---", err.Error())
 		os.Exit(1)
