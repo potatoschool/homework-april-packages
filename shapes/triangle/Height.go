@@ -7,7 +7,7 @@ import (
 )
 
 func (t Triangle) Height() float64 {
-	height := (2 * t.area) / t.Base
+	height := (2 * t.area) / t.BaseSideWidth
 
 	fmt.Println(height)
 

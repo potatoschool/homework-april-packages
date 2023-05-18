@@ -9,55 +9,66 @@ import (
 )
 
 type Triangle struct {
-	Base      float64
-	Right     float64
-	Left      float64
-	height    float64
-	area      float64
-	perimeter float64
-	name      string
+	ACorner        float64
+	BCorner        float64
+	BaseSideWidth  float64
+	RightSideWidth float64
+	LeftSideWidth  float64
+	height         float64
+	area           float64
+	perimeter      float64
+	name           string
 }
 
 func New() Triangle {
-	var bInput, rInput, lInput string
-	var b, r, l float64
+	var acInput, bcInput string
+	var ACorner, BCorner, CCorner float64
 	var err error
+	var tri Triangle
 
 	logger.Log("Triangle is chosen.")
 
-	for b == 0 {
-		fmt.Println("Enter base (number):")
-		fmt.Scanln(&bInput)
+	for CCorner == 0 {
+		for ACorner == 0 {
+			fmt.Println("Enter first corner angle in degrees (number):")
+			fmt.Scanln(&acInput)
 
-		b, err = strconv.ParseFloat(bInput, 64)
-		if err != nil {
-			fmt.Println("Width must be a number.")
+			ACorner, err = strconv.ParseFloat(acInput, 64)
+			if err != nil {
+				fmt.Println("Corner angle must be a number.")
+			}
+		}
+
+		for BCorner == 0 {
+			fmt.Println("Enter second corner angle in degrees (number):")
+			fmt.Scanln(&bcInput)
+
+			BCorner, err = strconv.ParseFloat(bcInput, 64)
+			if err != nil {
+				fmt.Println("Corner angle must be a number.")
+			}
+		}
+
+		CCorner = 180 - ACorner - BCorner
+
+		if CCorner <= 0 {
+			fmt.Println("Corners sum must be equal or less then 180.")
+			ACorner = 0
+			BCorner = 0
+			CCorner = 0
+		} else {
+			tri = Triangle{ACorner, BCorner, 100, 100, 100, 0, 0, 0, "triangle"}
 		}
 	}
 
-	for r == 0 {
-		fmt.Println("Enter right width (number):")
-		fmt.Scanln(&rInput)
-
-		r, err = strconv.ParseFloat(rInput, 64)
-		if err != nil {
-			fmt.Println("Right Width must be a number.")
-		}
-	}
-
-	for l == 0 {
-		fmt.Println("Enter left width (number):")
-		fmt.Scanln(&lInput)
-
-		l, err = strconv.ParseFloat(lInput, 64)
-		if err != nil {
-			fmt.Println("Left Width must be a number.")
-		}
-	}
-
-	tri := Triangle{b, r, l, 0, 0, 0, "triangle"}
-
-	logger.Log(fmt.Sprintf("Triangle initialized with base %f, right %f and left %f", b, r, l))
+	logger.Log(
+		fmt.Sprintf(
+			"Triangle initialized with A corner angle %f, B corner angle %f and Calculated Top corner angle %f",
+			ACorner,
+			BCorner,
+			CCorner,
+		),
+	)
 
 	tri.calculateArea()
 	tri.calculatePerimeter()

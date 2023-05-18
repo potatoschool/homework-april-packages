@@ -11,5 +11,7 @@ func Render(shape shapes.IShape, settings Settings) error {
 		settings: settings,
 	}
 
+	ebiten.SetWindowTitle(shape.GetName())
+
 	return ebiten.RunGame(&View)
 }

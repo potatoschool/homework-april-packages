@@ -7,7 +7,7 @@ import (
 )
 
 func (r Triangle) Perimeter() float64 {
-	return r.Base + r.Left + r.Right
+	return r.BaseSideWidth + r.LeftSideWidth + r.RightSideWidth
 }
 
 func (t *Triangle) calculatePerimeter() {

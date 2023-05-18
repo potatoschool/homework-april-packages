@@ -101,8 +101,8 @@ func main() {
 
 	settings := game.Settings{}
 
-	settings.SetHeight(320)
-	settings.SetWidth(320)
+	settings.SetHeight(720)
+	settings.SetWidth(1280)
 
 	logger.Log(fmt.Sprintf("User decided to render. Rendering a window with settings: screenWidth %d, screenHeight %d", 320, 320))
 

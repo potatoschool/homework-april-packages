@@ -10,7 +10,7 @@ import (
 func (t Triangle) Area() float64 {
 	s := t.Perimeter() / 2
 
-	area := math.Sqrt(s * (s - t.Base) * (s - t.Left) * (s - t.Right))
+	area := math.Sqrt(s * (s - t.BaseSideWidth) * (s - t.LeftSideWidth) * (s - t.RightSideWidth))
 
 	return area
 }
