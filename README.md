@@ -36,8 +36,9 @@ The programm will prompt you to enter the shape name
 ![Startup](https://github.com/potatoschool/shapes/blob/main/assets/startup.png?raw=true)
 
 ### Available shapes by default:
-- rectangle
+- rectangle 
 - circle
+- triangle
 
 ### Available commands by default:
 - --list - Will print all available shapes with their aliases in console
