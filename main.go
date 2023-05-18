@@ -11,6 +11,7 @@ import (
 	"github.com/potatoschool/shapes/shapes"
 	"github.com/potatoschool/shapes/shapes/circle"
 	"github.com/potatoschool/shapes/shapes/rectangle"
+	"github.com/potatoschool/shapes/shapes/triangle"
 )
 
 func main() {
@@ -34,6 +35,7 @@ func main() {
 	ShapesData := map[string]func() shapes.IShape{
 		rectangle.GetAlias(): rectangle.ToShape,
 		circle.GetAlias():    circle.ToShape,
+		triangle.GetAlias():  triangle.ToShape,
 	}
 
 	for shapeAliases, ShapeConstructor := range ShapesData {

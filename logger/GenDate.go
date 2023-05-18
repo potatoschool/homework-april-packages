@@ -11,7 +11,7 @@ func genDate(ts *time.Time) string {
 		ts.Month(),
 		ts.Day(),
 		ts.Hour(),
-		ts.Hour(),
+		ts.Minute(),
 		ts.Second(),
 	)
 }
